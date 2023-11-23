@@ -2,6 +2,8 @@ package model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,12 +28,12 @@ class RestaurantTest {
 	void testDonnerPossibilites() {
 		int[] possibilites = restaurant.donnerPossibilites(formulaire);
 		int[] expected = { 0, 2, 3, 0, 0, 0 };
-		assertArrayEquals(expected, possibilites,"Les tables numeros 2 et 3 devraient pouvoir être choisi");
+		assertArrayEquals(expected, possibilites,"Les tables numeros 2 et 3 devraient pouvoir ï¿½tre choisi");
 
 		int[] expected2 = { 0, 2, 3, 0, 0, 0, 7};
 		restaurant.ajouterTable(3);
 		possibilites = restaurant.donnerPossibilites(formulaire);
-		assertArrayEquals(expected2, possibilites,"Les tables numeros 2, 3 et 7 devraient pouvoir être choisi");
+		assertArrayEquals(expected2, possibilites,"Les tables numeros 2, 3 et 7 devraient pouvoir ï¿½tre choisi");
 	}
 
 	@Test

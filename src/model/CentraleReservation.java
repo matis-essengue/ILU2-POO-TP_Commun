@@ -1,23 +1,21 @@
 package model;
 
-public class CentraleReservation<T extends EntiteReservable> {
-    private T[] entites;
+public class CentraleReservation<E extends EntiteReservable<F>, F extends Formulaire> {
+    private E[] entites;
     private int nbEntites;
 
-    public CentraleReservation(T[] entites) {
+    public CentraleReservation(E[] entites) {
         this.entites = entites;
-        if (entites.length != 0) {
-            throw new IllegalArgumentException("Le tableau d'entités doit être vide");
-        }
         this.nbEntites = 0;
     }
 
-    public int ajouterEntite(T entite) {
+    public int ajouterEntite(E entite) {
         this.entites[this.nbEntites] = entite;
-        return this.nbEntites++;
+        this.entites[this.nbEntites].setNum(++this.nbEntites);
+        return this.nbEntites;
     }
 
-    public int[] donnePossibilites(Formulaire formulaire) {
+    public int[] donnerPossibilites(F formulaire) {
         int[] dispos = new int[this.nbEntites];
         for (int i = 0; i < this.nbEntites; i++) {
             if (this.entites[i].estLibre(formulaire) && this.entites[i].compatible(formulaire)) {
@@ -29,17 +27,18 @@ public class CentraleReservation<T extends EntiteReservable> {
         return dispos;
     }
 
-    public Reservation reserver(int numEntite, Formulaire formulaire) {
+    public Reservation reserver(int numEntite, F formulaire) {
         if (numEntite < 0 || numEntite >= this.nbEntites) {
             throw new IllegalArgumentException("Numéro d'entité invalide");
         }
-        if (!this.entites[numEntite].estLibre(formulaire)) {
+        if (!this.entites[numEntite - 1].estLibre(formulaire)) {
             throw new IllegalArgumentException("Entité déjà réservée");
         }
-        if (!this.entites[numEntite].compatible(formulaire)) {
+        if (!this.entites[numEntite - 1].compatible(formulaire)) {
+            System.out.println("Entité incompatible avec le formulaire");
             throw new IllegalArgumentException("Entité incompatible avec le formulaire");
         }
         formulaire.setIdentificationEntite(numEntite);
-        return this.entites[numEntite].reserver(formulaire);
+        return this.entites[numEntite - 1].reserver(formulaire);
     }
 }
