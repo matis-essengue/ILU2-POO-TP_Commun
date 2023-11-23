@@ -20,14 +20,14 @@ class CalendrierAnnuelTest {
 
 	@Test
 	void testEstLibre() {
-		assertTrue(calendrier.estLibre(31,12), "31/12 devrait être libre");
+		assertTrue(calendrier.estLibre(31,12), "31/12 devrait ï¿½tre libre");
 	}
 
 	@Test
 	void testReserver() {
-		assertTrue(calendrier.reserver(20,10), "reservation du 20/10 devrait être possible");
-		assertFalse(calendrier.estLibre(20,10), "20/10 devrait être occuper");
-		assertFalse(calendrier.reserver(20,10), "reservation du 20/10 ne devrait pas être possible");
+		assertTrue(calendrier.reserver(20,10), "reservation du 20/10 devrait ï¿½tre possible");
+		assertFalse(calendrier.estLibre(20,10), "20/10 devrait ï¿½tre occuper");
+		assertFalse(calendrier.reserver(20,10), "reservation du 20/10 ne devrait pas ï¿½tre possible");
 	}
 
 }
